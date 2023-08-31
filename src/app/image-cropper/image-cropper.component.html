@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="circle">
+                        <img [src]="croppedImage" class="img-fluid mhimag">
+                    </div>
+                    <h5 class="text-center mt-4 add-change-img" (click)="openModal(template)"> Add/ Change Image</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #template>
+    <div class="modal-header bg-color">
+        <h4 class="modal-title pull-left">Add Signature</h4>
+        <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <input type="file" (change)="fileChangeEvent($event)">
+        <br>
+        <image-cropper
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true" 
+          [aspectRatio]="selectedRatio"
+          imageBase64="Base64"
+          backgroundColor="0,0,0"
+            format="png"
+             (imageCropped)="imageCropped($event)" 
+             (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()" 
+            (loadImageFailed)="loadImageFailed()">
+        </image-cropper>
+
+    </div>
+    <img [src]="croppedImage" alt="">
+</ng-template>
